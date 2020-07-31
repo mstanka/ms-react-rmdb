@@ -10,11 +10,16 @@ export const useHomeFetch = () => {
     setError(false);
     setLoading(true);
 
+    // if no page in the endpoint it returns -1
+    const isLoadMore = endpoint.search('page')
+
     try {
       const result = await (await fetch(endpoint)).json();
       setState((prev) => ({
         ...prev,
-        movies: [...result.results],
+        movies: 
+        isLoadMore !== -1 ?  // spread old movies and append new result
+        [...prev.movies, ...result.results] : [...result.results],
         heroImage: prev.heroImage || result.results[0],
         currentPage: result.page,
         totalPages: result.total_pages,
