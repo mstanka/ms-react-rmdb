@@ -9,8 +9,8 @@ const App = () => (
   <>
     <Header />
     <Home />
-  <GlobalStyle />
-    </>
+    <GlobalStyle />
+  </>
 );
 
 export default App;
