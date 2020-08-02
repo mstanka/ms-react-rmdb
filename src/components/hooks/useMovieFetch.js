@@ -16,7 +16,7 @@ export const useMovieFetch = (movieId) => {
       console.log(result);
       const creditEndpoint = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
       const creditResult = await (await fetch(creditEndpoint)).json();
-      console.log(creditResult)
+      console.log(creditResult);
       const directors = creditResult.crew.filter(
         (member) => member.job === "Director"
       );
@@ -33,8 +33,17 @@ export const useMovieFetch = (movieId) => {
   }, [movieId]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (localStorage[movieId]) {
+      setState(JSON.parse(localStorage[movieId]));
+      setLoading(false);
+    } else {
+      fetchData();
+    }
+  }, [fetchData, movieId]);
+
+  useEffect(() => {
+    localStorage.setItem(movieId, JSON.stringify(state));
+  }, [movieId, state]);
 
   return [state, loading, error];
 };
