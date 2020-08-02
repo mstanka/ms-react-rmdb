@@ -12,13 +12,12 @@ export const useHomeFetch = () => {
 
     // if no page in the endpoint it returns -1
     const isLoadMore = endpoint.search("page");
-
     try {
       const result = await (await fetch(endpoint)).json();
       setState((prev) => ({
         ...prev,
         movies:
-          isLoadMore !== -1 // spread old movies and append new result
+          isLoadMore !== -1
             ? [...prev.movies, ...result.results]
             : [...result.results],
         heroImage: prev.heroImage || result.results[0],
