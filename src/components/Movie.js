@@ -1,7 +1,7 @@
 import React from "react";
 
 // Components
-import Actor from "./elements/Actor";
+import ActorThumb from "./elements/ActorThumb";
 import MovieInfo from "./elements/MovieInfo";
 import MovieInfoBar from "./elements/MovieInfoBar";
 import Navigation from "./elements/Navigation";
@@ -27,7 +27,7 @@ const Movie = ({ movieId }) => {
       />
       <Grid header="Actors">
         {movie.actors.map((actor) => (
-          <Actor key={actor.credit_id} actor={actor} />
+          <ActorThumb key={actor.credit_id} actor={actor} />
         ))}
       </Grid>
     </>
